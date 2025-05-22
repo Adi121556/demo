@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Main Blocks - Full Options Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .main-blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .block {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: 0.3s;
+    }
+    .block:hover {
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .block-title {
+      font-size: 22px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+    .option-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .option-item {
+      margin-bottom: 10px;
+      position: relative;
+      cursor: pointer;
+      padding-left: 20px;
+      user-select: none;
+    }
+    .option-item::before {
+      content: "➔";
+      position: absolute;
+      left: 0;
+      color: #007BFF;
+      transition: transform 0.3s;
+    }
+    .sub-options {
+      display: none;
+      margin-top: 10px;
+      margin-left: 20px;
+      list-style: none;
+      padding-left: 20px;
+      border-left: 2px solid #007BFF;
+    }
+    .sub-options li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #555;
+      position: relative;
+    }
+    .sub-options li::before {
+      content: "-";
+      position: absolute;
+      left: -15px;
+    }
+    .expanded::before {
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+<body>
+
+<h1>Main Blocks - Full Feature & Option Map</h1>
+
+<div class="main-blocks">
+
+  <!-- Landing Page -->
+  <div class="block">
+    <div class="block-title">Landing Page</div>
+    <ul class="option-list">
+      <li class="option-item" onclick="toggleSubOptions(this)">Homepage
+        <ul class="sub-options">
+          <li>Banner Section</li>
+          <li>Quick Links (Signup/Login)</li>
+          <li>Service Highlights</li>
+          <li>Customer Testimonials</li>
+          <li>Contact Us Quick Form</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Tracking
+        <ul class="sub-options">
+          <li>Tracking ID Input</li>
+          <li>Real-time Status View</li>
+          <li>Delivery ETA Display</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">About Us
+        <ul class="sub-options">
+          <li>Company Overview</li>
+          <li>Vision & Mission</li>
+          <li>Team Introduction</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Contact Us
+        <ul class="sub-options">
+          <li>Contact Form</li>
+          <li>Google Map Location</li>
+          <li>Customer Support Number</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Customer Side -->
+  <div class="block">
+    <div class="block-title">Customer Side</div>
+    <ul class="option-list">
+      <li class="option-item" onclick="toggleSubOptions(this)">Book Parcel
+        <ul class="sub-options">
+          <li>Select Shipper</li>
+          <li>Select Consignee</li>
+          <li>Enter Commodity</li>
+          <li>Enter Multiple Dimensions</li>
+          <li>Location Map Views</li>
+          <li>Calculation Algorithms</li>
+          <li>Order Summary</li>
+          <li>COD Management System</li>
+          <li>Express Delivery Option</li>
+          <li>Challan Back Option</li>
+          <li>Submit Order</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Hire Vehicle
+        <ul class="sub-options">
+          <li>Select Vehicle Type</li>
+          <li>Enter Pickup & Drop Location</li>
+          <li>Duration (12 hrs/24 hrs)</li>
+          <li>Driver Assignment</li>
+          <li>Cost Estimation</li>
+          <li>Booking Confirmation</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Order History
+        <ul class="sub-options">
+          <li>Past Parcel Orders</li>
+          <li>Past Vehicle Hire Orders</li>
+          <li>Download Invoices</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Track Order
+        <ul class="sub-options">
+          <li>Live Tracking Map</li>
+          <li>Driver Contact Info</li>
+          <li>Expected Delivery Time</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Profile Management
+        <ul class="sub-options">
+          <li>Edit Personal Information</li>
+          <li>Manage Address Book</li>
+          <li>Change Password</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Customer Support
+        <ul class="sub-options">
+          <li>Raise a Ticket</li>
+          <li>Chat Support</li>
+          <li>FAQs Section</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Wallet
+        <ul class="sub-options">
+          <li>Add Money</li>
+          <li>Transaction History</li>
+          <li>Refund Status</li>
+          <li>Offers & Promotions</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Driver Side -->
+  <div class="block">
+    <div class="block-title">Driver Side</div>
+    <ul class="option-list">
+      <li class="option-item" onclick="toggleSubOptions(this)">Driver Login
+        <ul class="sub-options">
+          <li>Username/Password Login</li>
+          <li>Forgot Password</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Assigned Deliveries
+        <ul class="sub-options">
+          <li>Today's Deliveries</li>
+          <li>Future Bookings</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Delivery Management
+        <ul class="sub-options">
+          <li>Mark Picked Up</li>
+          <li>Mark Delivered</li>
+          <li>Update Delivery Status</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Driver Earnings
+        <ul class="sub-options">
+          <li>Daily Earnings Summary</li>
+          <li>Payment Settlements</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Driver Support
+        <ul class="sub-options">
+          <li>Raise Issue</li>
+          <li>Emergency Contact</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Admin Side -->
+  <div class="block">
+    <div class="block-title">Admin Side</div>
+    <ul class="option-list">
+      <li class="option-item" onclick="toggleSubOptions(this)">Dashboard
+        <ul class="sub-options">
+          <li>Revenue Overview</li>
+          <li>Active Orders</li>
+          <li>Driver Activity</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Customer Management
+        <ul class="sub-options">
+          <li>View Customers</li>
+          <li>Approve New Customers</li>
+          <li>Block Customers</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Driver Management
+        <ul class="sub-options">
+          <li>Driver Onboarding</li>
+          <li>Assign Vehicles</li>
+          <li>Deactivate Driver</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Order Management
+        <ul class="sub-options">
+          <li>View All Orders</li>
+          <li>Assign Orders</li>
+          <li>Cancel/Reschedule Orders</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Reports & Analytics
+        <ul class="sub-options">
+          <li>Daily Reports</li>
+          <li>Revenue Reports</li>
+          <li>Driver Performance Reports</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Staff Management
+        <ul class="sub-options">
+          <li>Add Staff Member</li>
+          <li>Set Roles & Permissions</li>
+          <li>Activity Logs</li>
+        </ul>
+      </li>
+      <li class="option-item" onclick="toggleSubOptions(this)">Pricing & Settings
+        <ul class="sub-options">
+          <li>Update Rate Cards</li>
+          <li>Set Promotions</li>
+          <li>Configure Notifications</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  function toggleSubOptions(element) {
+    element.classList.toggle("expanded");
+    const subList = element.querySelector(".sub-options");
+    if (subList.style.display === "block") {
+      subList.style.display = "none";
+    } else {
+      subList.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>
