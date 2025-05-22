@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Customer Support</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #eef2f3, #ffffff);
+      margin: 0;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      color: #2c3e50;
+    }
+
+    .support-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .support-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .support-form input,
+    .support-form textarea,
+    .support-form select {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .support-form input:focus,
+    .support-form textarea:focus,
+    .support-form select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .support-form textarea {
+      height: 130px;
+      resize: vertical;
+    }
+
+    .support-form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .support-form button:hover {
+      background-color: #0056b3;
+    }
+
+    #otherProblemWrapper {
+      display: none;
+    }
+
+    @media (max-width: 500px) {
+      .support-container {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Customer Support</h1>
+
+  <div class="support-container">
+    <form class="support-form" onsubmit="submitSupportForm(event)">
+      <label for="problemType">Problem Type</label>
+      <select id="problemType" required onchange="handleProblemChange()">
+        <option value="">-- Please Select --</option>
+        <option>Delayed Delivery</option>
+        <option>Damaged Goods</option>
+        <option>Wrong Shipment</option>
+        <option>Payment Issue</option>
+        <option>Tracking Not Updating</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <div id="otherProblemWrapper">
+        <label for="otherProblem">Please describe the issue</label>
+        <input type="text" id="otherProblem" placeholder="Describe your issue" />
+      </div>
+
+      <label for="orderId">Related Order ID (if any)</label>
+      <input type="text" id="orderId" placeholder="e.g., KB123456" />
+
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="Full Name" required />
+
+      <label for="email">Your Email</label>
+      <input type="email" id="email" placeholder="your@email.com" required />
+
+      <label for="subject">Subject</label>
+      <input type="text" id="subject" placeholder="Brief subject" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Describe your concern" required></textarea>
+
+      <button type="submit">Raise Ticket</button>
+    </form>
+  </div>
+
+  <script>
+    function handleProblemChange() {
+      const problemType = document.getElementById("problemType").value;
+      const otherWrapper = document.getElementById("otherProblemWrapper");
+
+      if (problemType === "Other") {
+        otherWrapper.style.display = "block";
+        document.getElementById("otherProblem").setAttribute("required", true);
+      } else {
+        otherWrapper.style.display = "none";
+        document.getElementById("otherProblem").removeAttribute("required");
+        document.getElementById("otherProblem").value = "";
+      }
+    }
+
+    function generateTicketNumber() {
+      const randomNum = Math.floor(100000 + Math.random() * 900000);
+      return `TCK-${randomNum}`;
+    }
+
+    function submitSupportForm(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const problemType = document.getElementById("problemType").value;
+      const otherProblem = document.getElementById("otherProblem").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !problemType || !subject || !message) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      if (problemType === "Other" && !otherProblem) {
+        alert("Please describe your issue under 'Other'.");
+        return;
+      }
+
+      const ticketNumber = generateTicketNumber();
+      alert(`Thank you, ${name}! Your ticket has been raised.\n\nTicket Number: ${ticketNumber}`);
+      document.querySelector(".support-form").reset();
+      handleProblemChange(); // Reset the 'Other' field
+    }
+  </script>
+
+</body>
+</html>

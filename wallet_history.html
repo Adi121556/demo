@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Transaction History - KartBuddy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .filter {
+            margin: 20px 0;
+        }
+        .filter input {
+            padding: 10px;
+            margin: 5px;
+        }
+        .filter button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filter button:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        .download-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            background: #218838;
+        }
+    </style>
+    <script>
+        function downloadExcel() {
+            let table = document.querySelector("table");
+            let rows = Array.from(table.rows).map(row => 
+                Array.from(row.cells).map(cell => cell.innerText).join(",")
+            ).join("\n");
+            let blob = new Blob([rows], { type: 'text/csv' });
+            let a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'wallet_transactions.csv';
+            a.click();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Wallet Transaction History</h1>
+        <div class="filter">
+            <label>From: <input type="date" id="fromDate"></label>
+            <label>To: <input type="date" id="toDate"></label>
+            <button onclick="showTransactions()">Show</button>
+        </div>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Transaction ID</th>
+                <th>Transaction Type</th>
+                <th>Amount</th>
+                <th>Reference</th>
+                <th>Payment Method</th>
+                <th>Status</th>
+                <th>Balance After Transaction</th>
+                <th>Remarks</th>
+            </tr>
+            <tr>
+                <td>2025-02-15</td>
+                <td>TXN1001</td>
+                <td>Refunded Amount</td>
+                <td>+₹500</td>
+                <td>Order KB2431</td>
+                <td>Wallet</td>
+                <td>Successful</td>
+                <td>₹2150</td>
+                <td>Order cancellation refund</td>
+            </tr>
+            <tr>
+                <td>2025-02-14</td>
+                <td>TXN1002</td>
+                <td>Deducted Amount</td>
+                <td>-₹220</td>
+                <td>Order KB2430</td>
+                <td>Wallet</td>
+                <td>Successful</td>
+                <td>₹1650</td>
+                <td>Delivery charge</td>
+            </tr>
+            <tr>
+                <td>2025-02-13</td>
+                <td>TXN1003</td>
+                <td>Cashback</td>
+                <td>+₹50</td>
+                <td>Promo CB2025</td>
+                <td>Wallet</td>
+                <td>Successful</td>
+                <td>₹1870</td>
+                <td>Promo offer</td>
+            </tr>
+            <tr>
+                <td>2025-02-12</td>
+                <td>TXN1004</td>
+                <td>Recharge</td>
+                <td>+₹1000</td>
+                <td>Txn 987654321</td>
+                <td>UPI</td>
+                <td>Successful</td>
+                <td>₹1820</td>
+                <td>Wallet top-up</td>
+            </tr>
+            <tr>
+                <td>2025-02-11</td>
+                <td>TXN1005</td>
+                <td>Deducted Amount</td>
+                <td>-₹150</td>
+                <td>Order KB2429</td>
+                <td>Wallet</td>
+                <td>Successful</td>
+                <td>₹820</td>
+                <td>Delivery charge</td>
+            </tr>
+        </table>
+        <button class="download-btn" onclick="downloadExcel()">Download Excel Report</button>
+    </div>
+</body>
+</html>

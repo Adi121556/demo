@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logistics Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .dimension-section {
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 6px;
+            background: #f9f9f9;
+            position: relative;
+        }
+        .dimension-section h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #007BFF;
+        }
+        .remove-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .remove-button:hover {
+            background: darkred;
+        }
+        .dimension-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .dimension-row div {
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+        }
+        .total-weight {
+            background-color: #fff;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .add-button {
+            background-color: #28a745;
+            margin-top: 10px;
+        }
+        .add-button:hover {
+            background-color: #218838;
+        }
+        .summary {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        input[type=checkbox] {zoom: 2.5;}
+  
+        #express-delivery-container {
+        max-width: 500px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    #express-delivery-container .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    #express-delivery-container input[type="checkbox"] {
+        zoom: 2.5;
+        accent-color: #007bff; /* Modern blue checkbox color */
+    }
+
+    #express-delivery-container label {
+        font-size: 18px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    #express-delivery-container p {
+        font-size: 16px;
+        color: #d9534f; /* Bootstrap danger color for warning text */
+        font-weight: bold;
+        margin-top: 10px;
+    }
+   
+
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="container">
+        <h2>Logistics Order Form</h2>
+<br>   <h1>Wallet Balance : ₹. 2145</h1> 
+
+<label for="order-mode">Choose Order Mode:</label>
+<select id="order-mode" onchange="switchMode()">
+    <option value="dynamic">Dynamic Price</option>
+    <option value="fixed">Fixed Price(only show if given the access by admin with price sets)</option>
+</select>
+<hr>
+        <!-- Shipper Selection Dropdown -->
+        <label for="shipper">Select Pre-Registered Shipper:</label>
+        <select id="shipper">
+            <option value="shipper1">Shipper 1</option>
+            <option value="shipper2">Shipper 2</option>
+            <option value="shipper3">Shipper 3</option>
+        </select>
+
+          <!-- Time Range Selection -->
+  <label for="pickup-time">Preferred Pickup Time:</label>
+  <input type="text" id="pickup-time">
+
+    <!-- Pickup Notes -->
+        <label for="pickup-note">Pickup Note:</label>
+        <textarea id="pickup-note" rows="3" placeholder="Enter any pickup instructions..."></textarea>
+
+        <!-- Consignee Selection Dropdown -->
+        <label for="consignee">Select Pre-Registered Consignee:</label>
+        <select id="consignee">
+            <option value="consignee1">Consignee 1</option>
+            <option value="consignee2">Consignee 2</option>
+            <option value="consignee3">Consignee 3</option>
+        </select>
+        
+  
+  <label for="delivery-time">Preferred Delivery Time:</label>
+  <input type="text" id="delivery-time">
+   
+   <!-- Drop Notes -->
+   <label for="drop-note">Drop Note:</label>
+   <textarea id="drop-note" rows="3" placeholder="Enter any pickup instructions..."></textarea>
+   
+   <div id="express-delivery-container">
+    <div class="checkbox-wrapper">
+        <input type="checkbox" id="express_delivery" name="express_delivery" value="express_delivery">
+        <label for="express_delivery">Tick the box for express delivery</label>
+    </div>
+    <p>⚠ Express surcharges of 25% will be added to the final pre-tax charge.</p>
+</div>
+
+    
+
+        <div id="fixed-price-section" style="display: none;">
+            <p>Per Carton Rate: ₹90</p>
+            <p>Total Cartons: <input type="number" id="carton-count" min="1" value="1" oninput="calculateFixedPrice()"></p>
+        </div>
+
+        <div id="dynamic-price-section">
+            <h3>Dimensions</h3>
+            <div id="dimensions-container">
+                <div class="dimension-section">
+                    <h3>Dimension 1</h3>
+                    <div class="dimension-row">
+                        <div><label>Length (inches)</label><input type="number" class="length" min="0" oninput="calculateSummary()"></div>
+                        <div><label>Breadth (inches)</label><input type="number" class="breadth" min="0" oninput="calculateSummary()"></div>
+                        <div><label>Height (inches)</label><input type="number" class="height" min="0" oninput="calculateSummary()"></div>
+                    </div>
+                    <div class="dimension-row">
+                        <div><label>No. of Units</label><input type="number" class="units" min="1" value="1" oninput="calculateSummary()"></div>
+                        <div><label>Per Unit Weight (kg)</label><input type="number" class="unit-weight" min="0" value="0" oninput="calculateSummary()"></div>
+                        <div><label>Total Weight (kg)</label><input type="text" class="total-weight" value="0" readonly></div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="add-button" onclick="addDimensionRow()">Add More Dimensions</button>
+        </div>
+
+        <div class="summary">
+            <p>Total Units: <span id="total-units">0</span></p>
+            <p>Gross Weight: <span id="gross-weight">0</span> kg</p>
+            <p>Chargeable Weight: <span id="chargeable-weight">0</span> kg</p>
+            <p>Rate per KG: ₹6</p>
+            <p>Pre-tax Amount: ₹<span id="total-charge">0</span></p>
+            <p>GST (18%): ₹<span id="gst-amount">0</span></p>
+            <p><strong>Final Payable: ₹<span id="net-charge">0</span></strong></p>
+        </div>
+
+        <button type="submit">Submit Order</button>
+    </div>
+
+    <script>
+        function calculateSummary() {
+            let totalUnits = 0, totalWeight = 0, ratePerKg = 6;
+
+            document.querySelectorAll(".dimension-section").forEach(section => {
+                let units = parseFloat(section.querySelector(".units").value) || 1;
+                let unitWeight = parseFloat(section.querySelector(".unit-weight").value) || 0;
+                let totalWeightField = section.querySelector(".total-weight");
+
+                let rowTotalWeight = units * unitWeight;
+                totalWeightField.value = rowTotalWeight.toFixed(2);
+
+                totalUnits += units;
+                totalWeight += rowTotalWeight;
+            });
+
+            let totalCharge = Math.max(totalWeight * ratePerKg, 120);
+            let gstAmount = totalCharge * 0.18;
+            let netCharge = totalCharge + gstAmount;
+
+            document.getElementById("total-units").innerText = totalUnits;
+            document.getElementById("gross-weight").innerText = totalWeight.toFixed(2);
+            document.getElementById("chargeable-weight").innerText = totalWeight.toFixed(2);
+            document.getElementById("total-charge").innerText = totalCharge.toFixed(2);
+            document.getElementById("gst-amount").innerText = gstAmount.toFixed(2);
+            document.getElementById("net-charge").innerText = netCharge.toFixed(2);
+        }
+
+        function addDimensionRow() {
+            let container = document.getElementById("dimensions-container");
+            let newSection = container.firstElementChild.cloneNode(true);
+            newSection.querySelector(".total-weight").value = "0";
+
+            let removeButton = document.createElement("button");
+            removeButton.className = "remove-button";
+            removeButton.innerHTML = "✖";
+            removeButton.onclick = function () { removeDimension(this); };
+            newSection.prepend(removeButton);
+
+            newSection.querySelectorAll("input").forEach(input => {
+                if (!input.classList.contains("total-weight")) input.value = "";
+                input.addEventListener("input", calculateSummary);
+            });
+
+            container.appendChild(newSection);
+        }
+
+        function removeDimension(button) {
+            button.parentElement.remove();
+            calculateSummary();
+        }
+
+        document.querySelectorAll("input").forEach(input => input.addEventListener("input", calculateSummary));
+    </script>
+</body>
+</html>x

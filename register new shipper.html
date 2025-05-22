@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Shipper Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="tel"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h2>Create New Shipper</h2>
+        <label for="person_name">Person Name</label>
+        <input type="text" id="person_name" name="person_name" required>
+
+        <label for="contact_number">Contact Number</label>
+        <input type="tel" id="contact_number" name="contact_number" required>
+
+        <label for="alternate_number">Alternate Number</label>
+        <input type="tel" id="alternate_number" name="alternate_number">
+
+        <label for="company_name">Company Name</label>
+        <input type="text" id="company_name" name="company_name" required>
+
+        <label for="gst_no">GST No. (optional)</label>
+        <input type="text" id="gst_no" name="gst_no">
+
+        <label for="address_line_1">Address Line 1</label>
+        <input type="text" id="address_line_1" name="address_line_1" required>
+
+        <label for="address_line_2">Address Line 2</label>
+        <input type="text" id="address_line_2" name="address_line_2">
+
+        <label for="nearest_station">Nearest Station</label>
+        <input type="text" id="nearest_station" name="nearest_station" required>
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="state">State</label>
+        <input type="text" id="state" name="state" required>
+
+        <label for="pincode">Pincode</label>
+        <input type="number" id="pincode" name="pincode" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

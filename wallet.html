@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - KartBuddy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .wallet-balance {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #28a745;
+        }
+        .wallet-actions {
+            margin-top: 20px;
+        }
+        .wallet-actions input {
+            padding: 10px;
+            width: 200px;
+            margin-right: 10px;
+        }
+        .wallet-actions button {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .wallet-actions button:hover {
+            background: #218838;
+        }
+        .order-details {
+            margin-top: 30px;
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .order-details h2 {
+            color: #dc3545;
+        }
+        .order-details p {
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Good Wallet</h1>
+        <p>Manage your digital transactions for delivery orders with KartBuddy's Wallet. Payments are automatically deducted from your balance.</p>
+        <div class="wallet-balance">Wallet Balance: ₹1245</div>
+        <div class="wallet-actions">
+            <input type="number" placeholder="Enter amount" />
+            <button>Recharge</button>
+        </div>
+        <div class="order-details">
+            <h2>Recent Transactions</h2>
+            <p>Delivery Order #KB2435 - ₹220 deducted</p>
+            <p>Recharge - ₹500 added</p>
+            <p>Delivery Order #KB2434 - ₹150 deducted</p>
+            <p>Delivery Order #KB2433 - ₹250 deducted</p>
+            <p>Recharge - ₹1000 added</p>
+        </div>
+        <a href="wallet_history.html" class="btn">Wallet History</a>
+    </div>
+</body>
+</html>

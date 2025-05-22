@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Consignee Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>New Consignee Form</h2>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label>Person Name</label>
+                <input type="text" name="person_name" required>
+            </div>
+            <div class="form-group">
+                <label>Contact Number</label>
+                <input type="tel" name="contact_number" required>
+            </div>
+            <div class="form-group">
+                <label>Alternate Number</label>
+                <input type="tel" name="alternate_number">
+            </div>
+            <div class="form-group">
+                <label>Company Name</label>
+                <input type="text" name="company_name" required>
+            </div>
+            <div class="form-group">
+                <label>GST No. (Optional)</label>
+                <input type="text" name="gst_no">
+            </div>
+            <div class="form-group">
+                <label>Address Line 1</label>
+                <input type="text" name="address_line_1" required>
+            </div>
+            <div class="form-group">
+                <label>Address Line 2</label>
+                <input type="text" name="address_line_2">
+            </div>
+            <div class="form-group">
+                <label>Nearest Station</label>
+                <input type="text" name="nearest_station" required>
+            </div>
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" required>
+            </div>
+            <div class="form-group">
+                <label>State</label>
+                <input type="text" name="state" required>
+            </div>
+            <div class="form-group">
+                <label>Pincode</label>
+                <input type="number" name="pincode" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - KartBuddy</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        header {
+            background: #002244;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .main-wrapper {
+            display: flex;
+            margin-top: 60px;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #002244;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+
+        .sidebar.collapsed {
+            width: 70px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background: #f39c12;
+        }
+
+        .content {
+            flex: 1;
+            padding: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-left: 270px;
+            margin-top: 60px;
+            overflow-y: auto;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sub-menu {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .toggle-btn {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+
+        #chatSupportBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #f39c12;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 9999;
+        transition: background-color 0.3s ease;
+        }
+    </style>
+    <script defer>
+        function showPage(page) {
+            let title = document.getElementById("pageTitle");
+            let content = document.getElementById("pageContent");
+            title.innerText = page;
+            content.innerText = "You are viewing " + page + ".";
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+            sidebar.classList.toggle('collapsed');
+            content.style.marginLeft = sidebar.classList.contains('collapsed') ? '90px' : '270px';
+        }
+
+        function toggleSubMenu(id) {
+            const subMenu = document.getElementById(id);
+            subMenu.style.display = subMenu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('loggedIn'); 
+            sessionStorage.removeItem('loggedIn'); 
+            window.location.href = 'index.html'; 
+        }
+
+        function openLiveChat() {
+            alert('Live chat support coming soon!');
+            // Replace the alert with your chat widget code or open a chat window
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>KartBuddy - Customer Dashboard</h1>
+    </header>
+    <div class="sidebar">
+               
+        <button class="toggle-btn" onclick="toggleSidebar()">⇦</button>
+        <a href="#" onclick="showPage('Create Order')">🆕 Create Order</a>
+        <a href="#" onclick="showPage('Hire Dedicated Vehicle')">🚚 Hire Dedicated Vehicle</a>
+        <a href="#" onclick="showPage('Order History')">📦 Order History</a>
+
+        <a href="#" onclick="toggleSubMenu('walletSubMenu')">💰 Wallet</a>
+        <div id="walletSubMenu" class="sub-menu">
+            <a href="#" onclick="showPage('Check Wallet Balance')">💳 Check Wallet Balance</a>
+            <a href="#" onclick="showPage('Recharge Wallet')">🔋 Recharge Wallet</a>
+            <a href="#" onclick="showPage('Wallet History')">📊 Wallet History</a>
+        </div>
+
+        <a href="#" onclick="toggleSubMenu('consigneeSubMenu')">📋 Consignee</a>
+        <div id="consigneeSubMenu" class="sub-menu">
+            <a href="#" onclick="showPage('Register a New Consignee')">📝 Register a New Consignee</a>
+            <a href="#" onclick="showPage('List of Consignees')">📋 List of Consignees</a>
+            <a href="#" onclick="showPage('Modify the Consignee')">✏️ Modify the Consignee</a>
+        </div>
+
+        <a href="#" onclick="toggleSubMenu('shipperSubMenu')">🚢 Shipper</a>
+        <div id="shipperSubMenu" class="sub-menu">
+            <a href="#" onclick="showPage('Register a New Shipper')">📝 Register a New Shipper</a>
+            <a href="#" onclick="showPage('List of Shippers')">📋 List of Shippers</a>
+            <a href="#" onclick="showPage('Modify the Shipper')">✏️ Modify the Shipper</a>
+        </div>
+
+        <a href="#" onclick="showPage('Profile Settings')">👤 Profile Settings</a>
+        <a href="#" onclick="showPage('Support')">📞 Support</a>
+        <a href="#" onclick="showPage('Tracking Status')">🚚 Tracking Status</a>
+        <a href="#" onclick="showPage('Contact Us')">📧 Contact Us</a>
+        <a href="#" onclick="logoutUser()">🔓 Logout</a>
+    </div>
+    <div class="content">
+        <h2 id="pageTitle">Welcome to Your Dashboard</h2>
+        <div id="pageContent"></div>
+    </div>
+
+    <div id="chatSupportBtn" onclick="openLiveChat()">
+        💬 Chat with us
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Place Order</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h4>Place Your Order</h4>
+        <form id="orderForm">
+            <!-- Deployment Duration -->
+            <div class="input-field">
+                <select id="duration" onchange="handleDurationChange()">
+                    <option value="" disabled selected>Select Deployment Duration</option>
+                    <option value="12">12 Hrs</option>
+                    <!-- <option value="24">24 Hrs</option> -->
+                </select>
+            </div>
+
+            <!-- Start Date and Time -->
+            <div class="input-field">
+                <input type="text" id="start-date" class="datepicker" placeholder="Start Date" onchange="updateEndDateTime()">
+            </div>
+            <div class="input-field">
+                <input type="text" id="start-time" class="timepicker" placeholder="Start Time" onchange="updateEndDateTime()">
+            </div>
+
+            <!-- End Date and Time -->
+            <div class="input-field">
+                <input type="text" id="end-date" placeholder="End Date" disabled>
+            </div>
+            <div class="input-field">
+                <input type="text" id="end-time" placeholder="End Time" disabled>
+            </div>
+
+            <!-- Reason for Deployment -->
+            <div class="input-field">
+                <select id="reason">
+                    <option value="" disabled selected>Select Reason</option>
+                    <option value="Pick up Multi Drop">Pick up Multi Drop</option>
+                    <option value="Multi Pick up 1 Drop">Multi Pick up 1 Drop</option>
+                    <option value="1 Pick up 1 Drop">1 Pick up 1 Drop</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div class="input-field" id="other-reason" style="display: none;">
+                <input type="text" id="otherReason" placeholder="Specify Reason">
+            </div>
+
+            <!-- Vehicle Selection -->
+            <div class="input-field">
+                <select id="vehicle">
+                    <option value="" disabled selected>Select Vehicle</option>
+                    <option value="TATA ACE">TATA ACE</option>
+                    <option value="Pickup 9ft">Pickup 9ft</option>
+                    <option value="407-10feet">407-10feet</option>
+                    <option value="14 feet canter">14 feet canter</option>
+                    <option value="17-Feet canter">17-Feet canter</option>
+                    <option value="20-Feet canter">20-Feet canter</option>
+                    <option value="24-Feet canter">24-Feet canter</option>
+                </select>
+            </div>
+
+            <!-- Value Added Services -->
+            <p>
+                <label>
+                    <input type="checkbox" id="loading-checkbox" onchange="fetchCharges('loading')" />
+                    <span>Include Loading Charges (*charges will be applicable)</span>
+                </label>
+            </p>
+            <div class="input-field" id="loading-charges-field" style="display: none;">
+                <input type="number" id="loading-charges" placeholder="Loading Charges" readonly>
+            </div>
+
+            <p>
+                <label>
+                    <input type="checkbox" id="unloading-checkbox" onchange="fetchCharges('unloading')" />
+                    <span>Include Unloading Charges (*charges will be applicable)</span>
+                </label>
+            </p>
+            <div class="input-field" id="unloading-charges-field" style="display: none;">
+                <input type="number" id="unloading-charges" placeholder="Unloading Charges" readonly>
+            </div>
+            <div>
+                <p>
+                    <label>
+                        <input type="checkbox" id="gst-invoice-checkbox" />
+                        <span>Want GST Invoice?</span>
+                    </label>
+                </p>
+                
+            </div>
+
+            <button type="button" class="btn" onclick="placeOrder()">Order Now</button>
+            <button type="reset" class="btn red">Reset</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+                format: 'yyyy-mm-dd',
+                onClose: updateEndDateTime
+            });
+            M.Timepicker.init(document.querySelectorAll('.timepicker'), {
+                twelveHour: false,
+                onCloseEnd: updateEndDateTime
+            });
+            M.FormSelect.init(document.querySelectorAll('select'));
+        });
+
+        function handleDurationChange() {
+            updateEndDateTime();
+        }
+
+        function updateEndDateTime() {
+            const startDate = document.getElementById('start-date').value;
+            const startTime = document.getElementById('start-time').value;
+            const duration = parseInt(document.getElementById('duration').value);
+
+            if (startDate && startTime && duration) {
+                const [year, month, day] = startDate.split('-').map(Number);
+                const [hours, minutes] = startTime.split(':').map(Number);
+
+                const date = new Date(year, month - 1, day, hours, minutes);
+                date.setHours(date.getHours() + duration);
+
+                document.getElementById('end-date').value = date.toLocaleDateString();
+                document.getElementById('end-time').value = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+        }
+
+        async function fetchCharges(type) {
+            const vehicle = document.getElementById('vehicle').value;
+            if (!vehicle) {
+                alert('Please select a vehicle first');
+                document.getElementById(`${type}-checkbox`).checked = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(`/get-charges?vehicle=${vehicle}&type=${type}`);
+                const data = await response.json();
+
+                document.getElementById(`${type}-charges`).value = data.charges;
+                document.getElementById(`${type}-charges-field`).style.display = 'block';
+            } catch (error) {
+                console.error('Error fetching charges:', error);
+                alert('Failed to fetch charges. Please try again.');
+            }
+        }
+
+        function placeOrder() {
+            alert('Order placed successfully!');
+        }
+    </script>
+</body>
+</html>

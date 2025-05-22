@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .controls input,
+    .controls select {
+      padding: 8px 12px;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      min-width: 200px;
+    }
+
+    .order-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-table th,
+    .order-table td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .order-table th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .status-delivered {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-intransit {
+      color: orange;
+      font-weight: bold;
+    }
+
+    .status-cancelled {
+      color: red;
+      font-weight: bold;
+    }
+
+    .view-more-btn {
+      padding: 6px 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .view-more-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Order History</h1>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by Order ID, Item, Shipper, Consignee, Status...">
+    <select id="sortSelect">
+      <option value="desc">Sort by Date: Newest First</option>
+      <option value="asc">Sort by Date: Oldest First</option>
+    </select>
+  </div>
+
+  <table class="order-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Shipper</th>
+        <th>Consignee</th>
+        <th>Items</th>
+        <th>Total Paid</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="orderBody">
+      <!-- Orders will be inserted here by JS -->
+    </tbody>
+  </table>
+
+  <script>
+    const orders = [
+      {
+        orderId: "KB123456",
+        date: "2025-05-01",
+        status: "Delivered",
+        shipper: "Amit Sharma",
+        consignee: "Rohit Verma",
+        items: ["Courier Package - Mumbai to Pune"],
+        total: "₹450.00"
+      },
+      {
+        orderId: "KB123457",
+        date: "2025-04-27",
+        status: "In Transit",
+        shipper: "Neha Patel",
+        consignee: "Karan Mehta",
+        items: ["Full Truck Load - Mumbai"],
+        total: "₹3,200.00"
+      },
+      {
+        orderId: "KB123458",
+        date: "2025-04-20",
+        status: "Cancelled",
+        shipper: "Rahul Singh",
+        consignee: "Pooja Jain",
+        items: ["Part Load - Delhi to Jaipur"],
+        total: "₹800.00"
+      }
+    ];
+
+    const tbody = document.getElementById("orderBody");
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+
+    function renderOrders(orderList) {
+      tbody.innerHTML = "";
+      orderList.forEach(order => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${order.orderId}</td>
+          <td>${order.date}</td>
+          <td class="status-${order.status.toLowerCase().replace(/\s/g, '')}">${order.status}</td>
+          <td>${order.shipper}</td>
+          <td>${order.consignee}</td>
+          <td>${order.items.join(", ")}</td>
+          <td>${order.total}</td>
+          <td><button class="view-more-btn" onclick="alert('Details for ${order.orderId}')">View More</button></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function filterAndSortOrders() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const sortDirection = sortSelect.value;
+
+      let filtered = orders.filter(order =>
+        order.orderId.toLowerCase().includes(searchTerm) ||
+        order.status.toLowerCase().includes(searchTerm) ||
+        order.shipper.toLowerCase().includes(searchTerm) ||
+        order.consignee.toLowerCase().includes(searchTerm) ||
+        order.items.some(item => item.toLowerCase().includes(searchTerm))
+      );
+
+      filtered.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return sortDirection === "asc" ? dateA - dateB : dateB - dateA;
+      });
+
+      renderOrders(filtered);
+    }
+
+    // Initial render
+    renderOrders(orders);
+
+    // Event Listeners
+    searchInput.addEventListener("input", filterAndSortOrders);
+    sortSelect.addEventListener("change", filterAndSortOrders);
+  </script>
+
+</body>
+</html>
